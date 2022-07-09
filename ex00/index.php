@@ -1,7 +1,7 @@
 <?php
     include("TemplateEngine.php");
     $t = new TemplateEngine();
-    $p = array("name" => "Harry", 
+    $p = array("nom" => "Harry", 
     "auteur" => "JJK",
     "description" => "test",
     "prix" => "100");
