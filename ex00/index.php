@@ -5,4 +5,4 @@
     "auteur" => "JJK",
     "description" => "test",
     "prix" => "100");
-    $t->createFile("test", "book_description.html", $p);
+    $t->createFile("book.html", "book_description.html", $p);

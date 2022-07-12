@@ -2,12 +2,12 @@
     class HotBeverage{
         public $name;
         public $price;
-        public $resitence;
+        public $resistence;
 
         public function getName(){
             return $this->name;
         }
-        
+
         public function getPrice(){
             return $this->price;
         }

@@ -1,9 +1,9 @@
 <?php
     include("TemplateEngine.php");
-    include("Text.php");
+    include("HotBeverage.php");
+    include("Tea.php");
+    include("Coffee.php");
+    $drink = new Coffee();
     $t = new TemplateEngine();
-    $text = new Text(["famous"]);
-    $text->showHtml();
-    $text->addString("lol");
-    $text->showHtml();
-    $t->createFile("print.html", $text);
+    print_r($drink->name);
+    $t->createFile($drink);
