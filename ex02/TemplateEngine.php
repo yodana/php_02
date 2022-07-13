@@ -5,22 +5,14 @@
             $file = fopen($text->name . ".html", "w");
             $template = fopen('template.html', "r");
             $methods = $reflector->getMethods();
-            print_r($methods);
             $properties = $reflector->getProperties();
-            $attributs = ["description", "commentaire", "nom", "prix", "resistence"];
+            $attributs = ["description", "commentaire", "nom", "prix", "resistance"];
             $i = 0;
             while($line = fgets($template)){
                 if (strpos($line, "{") && strpos($line,"}")){
-                    while ($i <= 4 && (explode("{",explode('}', $line)[0])[1]) != $attributs[$i]){
-                        print_r((explode("{",explode('}', $line)[0])[1]) . PHP_EOL);
-                        print_r($attributs[$i]. PHP_EOL);
+                    while ($i <= 4 && (explode("{",explode('}', $line)[0])[1]) != $attributs[$i])
                         $i++;
-                    }
-                    if ($i <= 4){
-                        print_r($i);
-                        print_r($methods[$i+1]);
-                        //fputs($file, str_replace('{' . explode("{",explode('}', $line)[0])[1] . '}', $methods[$i+1]("get" . ucfirst($properties[$i]->getName()))->invoke($text), $line));
-                    }
+                    fputs($file, str_replace('{' . explode("{",explode('}', $line)[0])[1] . '}', $reflector->getMethod("get" .  ucfirst($properties[$i]->getName()))->invoke($text), $line));
                     $i = 0;
                 }
                 else

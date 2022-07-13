@@ -3,7 +3,7 @@
         public function __construct(){
             $this->name = "Café";
             $this->price = 1;
-            $this->resistence = "Very strong";
+            $this->resistence = 5;
         }
 
         private $description = "Un italiano";
