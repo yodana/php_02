@@ -5,27 +5,23 @@
             $file = fopen($text->name . ".html", "w");
             $template = fopen('template.html', "r");
             $methods = $reflector->getMethods();
+            print_r($methods);
             $properties = $reflector->getProperties();
-            //print_r($methods[1]);
-            foreach($methods as $m){
-                //print($m);
-                //print($m->invoke($text));
-            }
-            //print_r($properties[0]->getName());
+            $attributs = ["description", "commentaire", "nom", "prix", "resistence"];
             $i = 0;
             while($line = fgets($template)){
                 if (strpos($line, "{") && strpos($line,"}")){
-                    if ((explode("{",explode('}', $line)[0])[1]) == "resistance"){
-                        fputs($file, str_replace('{' . explode("{",explode('}', $line)[0])[1] . '}', $reflector->getMethod("getResistence")->invoke($text), $line));
+                    while ($i <= 4 && (explode("{",explode('}', $line)[0])[1]) != $attributs[$i]){
+                        print_r((explode("{",explode('}', $line)[0])[1]) . PHP_EOL);
+                        print_r($attributs[$i]. PHP_EOL);
+                        $i++;
                     }
-                    else if((explode("{",explode('}', $line)[0])[1]) != NULL){
-                        while ($properties[$i]->getName() != (explode("{",explode('}', $line)[0])[1]) && $i <= 4)
-                            $i++;
-                        if ($i <= 4){
-                            fputs($file, str_replace('{' . explode("{",explode('}', $line)[0])[1] . '}', $methods[$i + 1], $line));
-                        }
-                        $i = 0;
+                    if ($i <= 4){
+                        print_r($i);
+                        print_r($methods[$i+1]);
+                        //fputs($file, str_replace('{' . explode("{",explode('}', $line)[0])[1] . '}', $methods[$i+1]("get" . ucfirst($properties[$i]->getName()))->invoke($text), $line));
                     }
+                    $i = 0;
                 }
                 else
                     fputs($file, $line);
