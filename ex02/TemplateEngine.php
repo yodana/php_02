@@ -4,7 +4,6 @@
             $reflector = new ReflectionClass($text);
             $file = fopen($text->name . ".html", "w");
             $template = fopen('template.html', "r");
-            $methods = $reflector->getMethods();
             $properties = $reflector->getProperties();
             $attributs = ["description", "commentaire", "nom", "prix", "resistance"];
             $i = 0;
@@ -18,5 +17,7 @@
                 else
                     fputs($file, $line);
             }
+            fclose($file);
+            fclose($template);
         }
     }

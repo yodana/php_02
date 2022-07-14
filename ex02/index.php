@@ -6,3 +6,6 @@
     $drink = new Tea();
     $t = new TemplateEngine();
     $t->createFile($drink);
+    $drink = new Coffee();
+    $t = new TemplateEngine();
+    $t->createFile($drink);

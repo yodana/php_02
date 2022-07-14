@@ -1,6 +1,6 @@
 <?php
     class Tea extends HotBeverage{
-        public function __constructor(){
+        public function __construct(){
             $this->name = "Thé";
             $this->price = 10;
             $this->resistence = 0;
