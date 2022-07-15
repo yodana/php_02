@@ -1,16 +1,13 @@
 <?php
     class TemplateEngine{
-        public function createFile($fileName, Text $Text){
-            $file = fopen($fileName, "w");
-            fputs($file, '<!DOCTYPE html>
-            <html>
-                <head>
-                    <meta charset="utf-8">
-                    <title>CV</title>
-                </head>
-                <body>' . $Text->showHtml() . 
-                '</body>
-                </html>');
+        public $elem;
+        public function __construct(Elem $elem){
+            $this->elem = $elem;
+        }
+
+        public function createFile($fileName){
+            $file = fopen($fileName . ".html", "w");
+            fputs($file, $this->elem->getHtml());
             fclose($file);
         }
     }

@@ -27,6 +27,7 @@
         public function getHtml(){
             $i = 0;
             $end = [];
+            $resultat = "";
             foreach($this->html as $e){
                 $t = "";
                 for($j = 0; $j < $i; $j++){
@@ -41,9 +42,22 @@
                 }
                 else
                     $line = $t . '<' . $e["element"] . '>' . $e["balise"] . '</' . $e["element"] . '>' . PHP_EOL;
-                print_r($line);
+                $resultat = $resultat . $line;
                 $i++;
             }
-            print_r($end);
+            $i = 2;
+            foreach(array_reverse($end) as $e){
+                $t = "";
+                for($j = count($this->html) - $i; $j > 0; $j--){
+                    if ($j == count($this->html) - 1)
+                        $t = "\t";
+                    else
+                        $t = $t . "\t";
+                }
+                $line = $t . '</' . $e . '>' . PHP_EOL;
+                $resultat = $resultat . $line;
+                $i++;
+            }
+            return $resultat;
         }
     }
