@@ -1,7 +1,7 @@
 <?php
     class Elem{
         public $html = [];
-        public function __construct($element, $balise="", $attributes=""){
+        public function __construct($element, $balise="", $attributes=[]){
             new MyException($element);
             $this->html[] = array("element" => $element,
                 "balise" => $balise,
@@ -27,11 +27,20 @@
                         $t = $t . "\t";
                 }
                 if ($i < count($this->html)-1){
+                    $keys = array_keys($e["attributes"]);
+                    $values =  array_values($e["attributes"]);
+                    print_r($keys);
+                    print_r($values);
                     $line = $t . '<' . $e["element"] . '>' . $e["balise"] . PHP_EOL;
                     $end[] = $e["element"];
                 }
-                else
+                else{
+                    $keys = array_keys($e["attributes"]);
+                    $values =  array_values($e["attributes"]);
+                    print_r($keys);
+                    print_r($values);
                     $line = $t . '<' . $e["element"] . '>' . $e["balise"] . '</' . $e["element"] . '>' . PHP_EOL;
+                }
                 $resultat = $resultat . $line;
                 $i++;
             }
