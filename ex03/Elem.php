@@ -34,8 +34,8 @@
                     else
                         $t = $t . "\t";
                 }
-                if ($e["balise"] == "")
-                    $line = $t . '<' . $e["element"] . '>' . PHP_EOL;
+                if ($i == count($this->html))
+                    $line = $t . '<' . $e["element"] . '>' . $e["balise"] . PHP_EOL;
                 //else
                 //    $line = $t . '<' . $e["element"] 
                 print_r($line);
