@@ -27,10 +27,10 @@
                         $t = $t . "\t";
                 }
                 if ($i < count($this->html)-1){
-                    $keys = array_keys($e["attributes"]);
-                    $values =  array_values($e["attributes"]);
-                    print_r($keys);
-                    print_r($values);
+                    $attributes = "";
+                    foreach($e["attributes"] as $key => $value){
+                        $attributes = $attributes . " " . $key . '="' . $value . '"';
+                    }
                     $line = $t . '<' . $e["element"] . '>' . $e["balise"] . PHP_EOL;
                     $end[] = $e["element"];
                 }
