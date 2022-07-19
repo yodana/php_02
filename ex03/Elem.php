@@ -12,6 +12,9 @@
                    $this->html[] = array("element" => $element,
                    "balise" => $balise,
                     "index" => 0);
+                    $this->html[] = array("element" => $element,
+                   "balise" => $balise,
+                    "index" => 1);
                 }
             }
             catch(Exception $e){
@@ -19,25 +22,18 @@
             }
         }
         public function pushElement(Elem $elem){
-            $this->html[] = $elem->html;
+            $save = array_pop($this->html);
+            foreach($elem->html as $e){
+                $this->html[] = $e;
+            }
+            $this->html[] = $save;
+            print_r($this->html);
         }
         public function getHtml(){
             $i = 0;
             $queue = $this->html;
             $resultat = "";
             $save = [];
-            foreach($this->html as $e){
-                if(is_array($e) == 1)
-                    $save[$i][] = $e;
-            }
-
-            $queue = $save[$i];
-            $i++;
-            foreach($queue as $e){
-                if(is_array($e) == 1)
-                    $save[$i][] = $e;
-            }
-            print_r($save[$i]);
             /*foreach($this->html as $e){
                 $t = "";
                 for($j = 0; $j < $i; $j++){
