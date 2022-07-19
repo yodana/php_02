@@ -1,12 +1,13 @@
 <?php
     include("TemplateEngine.php");
     include("Elem.php");
-    $e = new Elem("html");
-    $e->pushElement(new Elem('body'));
-    $e->pushElement(new Elem('p', 'Lorem ipsum'));
-    $e->pushElement(new Elem('p', 'Lorem ipsum'));
-    $b = new Elem("div");
-    $b->pushElement(new Elem('h1', 'Yo'));
-    $e->pushElement($b);
-    $t = new TemplateEngine($e);
-    $t->createFile("myHtml");    
+    $elem = new Elem('html');
+    $head = new Elem('head');
+    $head->pushElement(new Elem('title'));
+    $head->pushElement(new Elem('meta'));
+    $elem->pushElement($head);
+    $body = new Elem('body');
+    $body->pushElement(new Elem('p', 'Lorem ipsum'));
+    $elem->pushElement($body);
+    echo $elem->getHTML();
+    

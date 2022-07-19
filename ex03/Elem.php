@@ -10,25 +10,35 @@
                 }
                 else{
                    $this->html[] = array("element" => $element,
-                   "balise" => $balise);
+                   "balise" => $balise,
+                    "index" => 0);
                 }
             }
             catch(Exception $e){
                echo $e . PHP_EOL; 
             }
         }
-
         public function pushElement(Elem $elem){
-            foreach($elem->html as $e){
-                $this->html[] = $e;
-            }
+            $this->html[] = $elem->html;
         }
-
         public function getHtml(){
             $i = 0;
-            $end = [];
+            $queue = $this->html;
             $resultat = "";
+            $save = [];
             foreach($this->html as $e){
+                if(is_array($e) == 1)
+                    $save[$i][] = $e;
+            }
+
+            $queue = $save[$i];
+            $i++;
+            foreach($queue as $e){
+                if(is_array($e) == 1)
+                    $save[$i][] = $e;
+            }
+            print_r($save[$i]);
+            /*foreach($this->html as $e){
                 $t = "";
                 for($j = 0; $j < $i; $j++){
                     if ($j == 0)
@@ -57,7 +67,7 @@
                 $line = $t . '</' . $e . '>' . PHP_EOL;
                 $resultat = $resultat . $line;
                 $i++;
-            }
+            }*/
             return $resultat;
         }
     }
