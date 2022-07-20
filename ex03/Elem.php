@@ -12,8 +12,8 @@
                    $this->html[] = array("element" => $element,
                    "balise" => $balise,
                     "index" => 0);
-                    $this->html[] = array("element" => $element,
-                   "balise" => $balise,
+                    $this->html[] = array("element" => '/' . $element,
+                   "balise" => "",
                     "index" => 1);
                 }
             }
@@ -30,11 +30,11 @@
             print_r($this->html);
         }
         public function getHtml(){
-            $i = 0;
-            $queue = $this->html;
             $resultat = "";
-            $save = [];
-            /*foreach($this->html as $e){
+            $i = 0;
+            $k = 0;
+            $end = 0;
+            while($k < count($this->html)-1){
                 $t = "";
                 for($j = 0; $j < $i; $j++){
                     if ($j == 0)
@@ -42,16 +42,31 @@
                     else
                         $t = $t . "\t";
                 }
-                if ($i < count($this->html)-1){
-                    $line = $t . '<' . $e["element"] . '>' . $e["balise"] . PHP_EOL;
+                if($k < count($this->html) -1 && ('/' . $this->html[$k]["element"] == ($this->html[$k+1]["element"]) && $this->html[$k+1]["index"] == 1)){
+                    $line = $t . '<' . $this->html[$k]["element"] . '>' . $this->html[$k]["balise"];
+                    $end = 1;
+                }
+                else if ($end == 0){
+                    $line = $t . '<' . $this->html[$k]["element"] . '>' . $this->html[$k]["balise"] . PHP_EOL;
+                }
+                else if ($end == 1){
+                    $line = '<' . $this->html[$k]["element"] . '>' . PHP_EOL;
+                    $end = 0;
+                }
+                if ($this->html[$k]["index"] == 1){
+                    $i--;
+                }
+                /*if ($i < count($this->html)-1){
+                    $line = $t . '<' . $e$this->html[$k]["element"] . '>' . $e["balise"] . PHP_EOL;
                     $end[] = $e["element"];
                 }
                 else
-                    $line = $t . '<' . $e["element"] . '>' . $e["balise"] . '</' . $e["element"] . '>' . PHP_EOL;
+                    $line = $t . '<' . $e["element"] . '>' . $e["balise"] . '</' . $e["element"] . '>' . PHP_EOL;*/
                 $resultat = $resultat . $line;
+                $k++;
                 $i++;
             }
-            $i = 2;
+            /*$i = 2;
             foreach(array_reverse($end) as $e){
                 $t = "";
                 for($j = count($this->html) - $i; $j > 0; $j--){
