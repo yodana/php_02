@@ -54,4 +54,7 @@
             }
             return $resultat;
         }
+        public function validHtml(){
+            
+        }
     }
