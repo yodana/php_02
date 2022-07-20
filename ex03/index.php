@@ -3,11 +3,15 @@
     include("Elem.php");
     $elem = new Elem('html');
     $head = new Elem('head');
-    $head->pushElement(new Elem('title'));
-    $head->pushElement(new Elem('meta'));
     $elem->pushElement($head);
     $body = new Elem('body');
     $body->pushElement(new Elem('p', 'Lorem ipsum'));
+    $body->pushElement(new Elem('p', 'Lorem ipsum'));
+    $newbody = new Elem('body');
+    $newbody->pushElement(new Elem('p', 'Lorem ipsum'));
+    $body->pushElement($newbody);
     $elem->pushElement($body);
-    echo $elem->getHTML();
+    $t = new TemplateEngine($elem);
+    $t->createFile("myHtml");
+
     

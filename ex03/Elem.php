@@ -11,10 +11,12 @@
                 else{
                    $this->html[] = array("element" => $element,
                    "balise" => $balise,
-                    "index" => 0);
+                    "index" => 0,
+                    "tab" => 0);
                     $this->html[] = array("element" => '/' . $element,
                    "balise" => "",
-                    "index" => 1);
+                    "index" => 1,
+                    "tab" => 0);
                 }
             }
             catch(Exception $e){
@@ -24,19 +26,18 @@
         public function pushElement(Elem $elem){
             $save = array_pop($this->html);
             foreach($elem->html as $e){
+                $e["tab"] = $e["tab"] + 1;
                 $this->html[] = $e;
             }
             $this->html[] = $save;
-            print_r($this->html);
         }
         public function getHtml(){
             $resultat = "";
-            $i = 0;
             $k = 0;
             $end = 0;
-            while($k < count($this->html)-1){
+            while($k < count($this->html)){
                 $t = "";
-                for($j = 0; $j < $i; $j++){
+                for($j = 0; $j < $this->html[$k]["tab"]; $j++){
                     if ($j == 0)
                         $t = "\t";
                     else
@@ -53,32 +54,9 @@
                     $line = '<' . $this->html[$k]["element"] . '>' . PHP_EOL;
                     $end = 0;
                 }
-                if ($this->html[$k]["index"] == 1){
-                    $i--;
-                }
-                /*if ($i < count($this->html)-1){
-                    $line = $t . '<' . $e$this->html[$k]["element"] . '>' . $e["balise"] . PHP_EOL;
-                    $end[] = $e["element"];
-                }
-                else
-                    $line = $t . '<' . $e["element"] . '>' . $e["balise"] . '</' . $e["element"] . '>' . PHP_EOL;*/
                 $resultat = $resultat . $line;
                 $k++;
-                $i++;
             }
-            /*$i = 2;
-            foreach(array_reverse($end) as $e){
-                $t = "";
-                for($j = count($this->html) - $i; $j > 0; $j--){
-                    if ($j == count($this->html) - 1)
-                        $t = "\t";
-                    else
-                        $t = $t . "\t";
-                }
-                $line = $t . '</' . $e . '>' . PHP_EOL;
-                $resultat = $resultat . $line;
-                $i++;
-            }*/
             return $resultat;
         }
     }
