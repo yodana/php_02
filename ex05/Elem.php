@@ -92,6 +92,16 @@
                         return false;
                     }
                 }
+                if ($this->html[$k]["element"] == "table"){
+                    $save = $k;
+                    $tab = $this->html[$k]["tab"];
+                    while ($k < count($this->html) && $this->html[$k]["element"] != "/table"){
+                        if ($this->html[$k]["tab"] = $tab && $this->html[$k]["element"] != "tr"){
+                            return false;
+                        }
+                        $k++;
+                    }
+                }
                 $k++;
             }
             return true;

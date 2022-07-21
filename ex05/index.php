@@ -42,8 +42,21 @@
     $p = new Elem('p', 'lol');
     $p->pushElement(new Elem('p', "lol"));
     $body->pushElement($p);
-
     $e->pushElement($body);
     print_r($e->getHtml());
     $t = new TemplateEngine($e);
     echo $e->validPage();
+
+    $e = new Elem("html");
+    $head = new Elem("head");
+    $head->pushElement(new Elem('title'));
+    $head->pushElement(new Elem("meta", "", ["charset" => "utf-8"]));
+    $e->pushElement($head);
+    $body = new Elem('body');
+    $p = new Elem('p', 'lol');
+    $body->pushElement($p);
+    $e->pushElement($body);
+    print_r($e->getHtml());
+    $t = new TemplateEngine($e);
+    echo $e->validPage();
+    
