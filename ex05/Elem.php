@@ -54,7 +54,46 @@
             }
             return $resultat;
         }
-        public function validHtml(){
-            
+
+        public function validPage(){
+            if($this->html[0]["element"] != "html")
+                return false;
+            $k = 0;
+            $head = 0;
+            $save = 0;
+            while($k < count($this->html)){
+                if ($this->html[$k]["element"] == "head"){
+                    $save = $k;
+                    $title = 0;
+                    $meta = 0;
+                    while($k < count($this->html)){
+                        if ($this->html[$k]["element"] == "title") 
+                            $title = $title + 1;
+                        if ($this->html[$k]["element"] == "meta"){
+                            foreach($this->html[$k]["attributes"] as $key => $value){
+                                if ($key == "charset")
+                                    $meta = $meta + 1;
+                            }
+                        }
+                        $k++;
+                    }
+                    if ($meta != 1 || $title != 1)
+                        return false;
+                    $k = $save;
+                }
+                if ($this->html[$k]["element"] == "/head"){
+                    if (($k < count($this->html)-1 && $this->html[$k+1]["element"] != "body") || $head == 1){
+                        return false;
+                    }
+                    $head = 1;
+                }
+                if ($this->html[$k]["element"] == "p"){
+                    if ($this->html[$k+1]["element"] != "/p" || $this->html[$k]["balise"] == ""){
+                        return false;
+                    }
+                }
+                $k++;
+            }
+            return true;
         }
     }
