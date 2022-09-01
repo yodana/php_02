@@ -8,10 +8,8 @@
     $body->pushElement(new Elem('p', 'Lorem ipsum'));
     $body->pushElement(new Elem('p', 'Lorem ipsum'));
     $newbody = new Elem('body');
-    $newbody->pushElement(new Elem('p', 'Lorem ipsum'));
+    $newbody->pushElement(new Elem('dfsgf', 'Lorem ipsum'));
     $body->pushElement($newbody);
     $elem->pushElement($body);
     $t = new TemplateEngine($elem);
     $t->createFile("myHtml");
-
-    

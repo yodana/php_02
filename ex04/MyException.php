@@ -1,5 +1,5 @@
 <?php
-    class MyException{
+    class MyException extends Exception{
         private $authorized = ["meta", "img", "hr", "br", "html", "head",
         "body", "title", "h1", "h2", "h3", "h4", "h5", "h6", "p", "span", "div", "table", "tr", "th", "td", "ul", "ol", "li"];
 

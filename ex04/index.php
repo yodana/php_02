@@ -5,6 +5,7 @@
     $e = new Elem("html");
     $body = new Elem("body");
     $body->pushElement(new Elem('p', 'Lorem ipsum',  ['class' => 'text-muted', "style" => "background:red"]));
+    $e->pushElement($body);
     $e->pushElement(new Elem('p', 'Lorem ipsum', ['class' => 'text-muted', "style" => "background:red"]));
     $e->getHtml();
     $t = new TemplateEngine($e);

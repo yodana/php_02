@@ -95,12 +95,53 @@
                 if ($this->html[$k]["element"] == "table"){
                     $save = $k;
                     $tab = $this->html[$k]["tab"];
-                    while ($k < count($this->html) && $this->html[$k]["element"] != "/table"){
-                        if ($this->html[$k]["tab"] = $tab && $this->html[$k]["element"] != "tr"){
+                    $k++;
+                    $tr = 0;
+                    while ($this->html[$k]["element"] != "/table"){
+                        if ($this->html[$k]["tab"] == $tab + 1 && $this->html[$k]["index"] == 0 && $this->html[$k]["element"] != "tr"){
                             return false;
                         }
+                        else
+                            $tr = 1;
                         $k++;
                     }
+                    if ($tr == 0)
+                        return false;
+                    $k = $save;
+                }
+                if ($this->html[$k]["element"] == "tr"){
+                    $save = $k;
+                    $tab = $this->html[$k]["tab"];
+                    $k++;
+                    $valid = 0;
+                    while ($this->html[$k]["element"] != "/tr"){
+                        if ($this->html[$k]["index"] == 0 && ($this->html[$k]["element"] != "th" && $this->html[$k]["element"] != 'td')){
+                            return false;
+                        }
+                        else
+                            $valid = 1;
+                        $k++;
+                    }
+                    if($valid == 0)
+                        return false;
+                    $k = $save;
+                }
+                if ($this->html[$k]["element"] == "ul" || $this->html[$k]["element"] == "ol"){
+                    $save = $k;
+                    $tab = $this->html[$k]["tab"];
+                    $k++;
+                    $valid = 0;
+                    while ($this->html[$k]["element"] != "/ul" && $this->html[$k]["element"] != "/ol"){
+                        if ($this->html[$k]["tab"] == $tab + 1 && $this->html[$k]["index"] == 0 && ($this->html[$k]["element"] != "li")){
+                            return false;
+                        }
+                        else
+                            $valid = 1;
+                        $k++;
+                    }
+                    if($valid == 0)
+                        return false;
+                    $k = $save;
                 }
                 $k++;
             }
